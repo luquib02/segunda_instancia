@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .navbar {
+      background-color: white;
+      border-bottom: 1px solid #dee2e6;
+    }
+    .navbar-nav .nav-link {
+      color: #6c757d;
+    }
+    .navbar-nav .nav-link:hover {
+      color: #343a40;
+    }
+    .sidebar {
+      background-color: #d1d3d4;
+      padding: 20px;
+      border-radius: 10px;
+      height: 100%;
+    }
+    .sidebar .hijos-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .sidebar .hijos-item img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+    .main-content {
+      background-color: #343a40;
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    .btn-light {
+      border: 1px solid #6c757d;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="#">Comedor Escolar</a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Cerrar Sesión</a>
+        </li>
+      </ul>
+    </div>
+    <button class="btn btn-outline-secondary">MI PERFIL</button>
+  </nav>
+
+  <div class="container mt-4">
+    <h2 id="padre">Bienvenido, padre</h2>
+    <div class="row mt-4">
+      <div class="col-md-3 sidebar">
+        <h5>HIJOS</h5>
+        <div class="hijos-item">
+          <img src="https://via.placeholder.com/50" alt="Imagen de Elsa Pato">
+          <span>ELSA PATO</span>
+        </div>
+        <div class="hijos-item">
+          <img src="https://via.placeholder.com/50" alt="Imagen de Luis Hernández">
+          <span>LUIS HERNÁNDEZ</span>
+        </div>
+      </div>
+      <div class="col-md-9 main-content">
+        <h5>HISTORIAL DE ELECCIONES</h5>
+        <p id="historialElecciones"></p>
+        <ul id="lista">
+        </ul>
+        <h5 class="mt-4">PLATOS PROHIBIDOS</h5>
+        <p id="platosProhibidos">No hay platos prohibidos</p>
+        <button class="btn btn-light">AGREGAR</button>
+        <button class="btn btn-light ml-2">BORRAR</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script type="module" src="javascript.js"></script>
+</body>
+</html>

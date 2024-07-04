@@ -1,0 +1,29 @@
+.topbar{
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    background-color: white;
+    align-items: center;
+}
+
+.links a {
+    margin-right: 30px;
+}
+.container img {
+    align-items: center;
+    margin-top: 71px;
+    width: 100%;
+    height: auto;
+}
+.bottomleft {
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+    font-size: 18px;
+}

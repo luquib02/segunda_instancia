@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1718573377406" clover="3.2.0">
+  <project timestamp="1718573377406" name="All files">
+    <metrics statements="34" coveredstatements="24" conditionals="4" coveredconditionals="4" methods="20" coveredmethods="12" elements="58" coveredelements="40" complexity="0" loc="34" ncloc="34" packages="1" files="5" classes="5"/>
+    <file name="alumno.js" path="C:\Users\Luca\Desktop\obligatorio 2 fis\proyecto-m3aan-bafico-lopez\src\domain\alumno.js">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+    </file>
+    <file name="country.js" path="C:\Users\Luca\Desktop\obligatorio 2 fis\proyecto-m3aan-bafico-lopez\src\domain\country.js">
+      <metrics statements="4" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="2"/>
+      <line num="5" count="1" type="stmt"/>
+      <line num="9" count="1" type="stmt"/>
+      <line num="13" count="0" type="stmt"/>
+      <line num="17" count="0" type="stmt"/>
+    </file>
+    <file name="padre.js" path="C:\Users\Luca\Desktop\obligatorio 2 fis\proyecto-m3aan-bafico-lopez\src\domain\padre.js">
+      <metrics statements="5" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
+      <line num="4" count="8" type="stmt"/>
+      <line num="8" count="0" type="stmt"/>
+      <line num="12" count="0" type="stmt"/>
+      <line num="16" count="0" type="stmt"/>
+      <line num="17" count="0" type="stmt"/>
+    </file>
+    <file name="sistema.js" path="C:\Users\Luca\Desktop\obligatorio 2 fis\proyecto-m3aan-bafico-lopez\src\domain\sistema.js">
+      <metrics statements="18" coveredstatements="15" conditionals="4" coveredconditionals="4" methods="7" coveredmethods="5"/>
+      <line num="9" count="6" type="stmt"/>
+      <line num="10" count="6" type="stmt"/>
+      <line num="14" count="6" type="stmt"/>
+      <line num="18" count="6" type="stmt"/>
+      <line num="23" count="0" type="stmt"/>
+      <line num="27" count="0" type="stmt"/>
+      <line num="28" count="0" type="stmt"/>
+      <line num="32" count="3" type="stmt"/>
+      <line num="33" count="3" type="stmt"/>
+      <line num="34" count="3" type="stmt"/>
+      <line num="35" count="3" type="cond" truecount="2" falsecount="0"/>
+      <line num="36" count="2" type="stmt"/>
+      <line num="39" count="3" type="stmt"/>
+      <line num="43" count="3" type="stmt"/>
+      <line num="44" count="3" type="stmt"/>
+      <line num="45" count="3" type="cond" truecount="2" falsecount="0"/>
+      <line num="46" count="2" type="stmt"/>
+      <line num="49" count="3" type="stmt"/>
+    </file>
+    <file name="usuario.js" path="C:\Users\Luca\Desktop\obligatorio 2 fis\proyecto-m3aan-bafico-lopez\src\domain\usuario.js">
+      <metrics statements="7" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="5"/>
+      <line num="5" count="20" type="stmt"/>
+      <line num="6" count="20" type="stmt"/>
+      <line num="10" count="9" type="stmt"/>
+      <line num="14" count="0" type="stmt"/>
+      <line num="18" count="3" type="stmt"/>
+      <line num="22" count="8" type="stmt"/>
+      <line num="26" count="6" type="stmt"/>
+    </file>
+  </project>
+</coverage>
