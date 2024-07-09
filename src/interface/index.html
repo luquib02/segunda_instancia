@@ -30,7 +30,7 @@
     .btn-light {
       border: 1px solid #6c757d;
     }
-    .hero {
+    #pantalla-principal {
       position: relative;
       background-image: url('/img/image.png'); 
       background-size: cover;
@@ -38,7 +38,7 @@
       height: 100vh;
       color: white;
     }
-    .hero-text {
+    .section-text {
       position: absolute;
       bottom: 20px;
       left: 20px;
@@ -105,6 +105,12 @@
   border-radius: 0;
   padding: 0.5em 0;
 }
+#listaMenus {
+  text-align: left;
+}
+label {
+  padding-left: 4px;
+}
 .myform .btn:hover {
   background-color: inherit;
   color: #fff;
@@ -141,79 +147,102 @@ p a:hover {
 }
   </style>
     <script> 
-      function showSection(sectionId) {
-        document.querySelectorAll('.hero').forEach(function(section) {
-          section.classList.add('d-none');
-          section.classList.remove('d-block');
-        });
-        document.getElementById(sectionId).classList.remove('d-none');
-        document.getElementById(sectionId).classList.add('d-block');}
     </script>
 </head>
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">Comedor Escolar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" id="btnMenu" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ml-auto">
+    <ul class="navbar-nav ml-auto" id="elemNav">
       <li class="nav-item">
-        <a class="nav-link" href="#">Sobre nosotros</a>
+        <a class="nav-link" href="#" id="navlinks" >Sobre nosotros</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Contacto</a>
+        <a class="nav-link" href="#" id="navlinks2">Contacto</a>
       </li>
       <li class="nav-item">
-        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#ModalForm">Iniciar sesión</button>
+        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#ModalForm" id="btnInicioSesion">Iniciar sesión</button>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#panel-alumnos" onclick="showSection('panel-alumnos')">panel alumnos </a>
+      <li class="nav-item d-none" id="btnCerrarSesion">
+        <button type="button" class="btn btn-secondary" onclick="showSection('pantalla-principal');logout()">Cerrar Sesión</button>
       </li>
     </ul>
   </div>
 </nav>
-
-<div class="hero">
-  <div class="hero-text">
-    .<div class="p-3 mb-2 bg-dark text-white"><h1>Reservá <span class="bolder">online</span> el almuerzo para tus hijos.</h1></div>
-  </div>
-</div>
-<div class="modal fade" id="ModalForm" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-body">
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-          <div class="myform bg-dark">
-              <h1 class="text-center" id="cartelInicioSesion">Iniciar Sesión</h1>
-              <form>
-                  <div class="mb-3 mt-4">
-                      <label for="txtBox_Usuario" class="form-label">Nombre de usuario</label>
-                      <input type="text" class="form-control" id="txtBox_Usuario" required>
-                  </div>
-                  <div class="mb-3">
-                      <label for="txtBox_Contrasenia" class="form-label">Contraseña</label>
-                      <input type="password" class="form-control" id="txtBox_Contrasenia" required minlength="8">
-                  </div>
-                  <button id="btn_iniSession" type="button" class="btn btn-light mt-3">ENTRAR</button>
-                  <p>Olvidó su contraseña? <a href="#">Recuperar</a></p>
-              </form>
-          </div>
+<div class="section d-none" id="panel-padre">
+  <div class="container mt-4">
+    <h2 id="padre">Bienvenido, padre</h2>
+    <div class="row mt-4">
+      <div class="col-md-3 sidebar">
+        <h5>HIJOS</h5>
+        <div class="hijos-item">
+          <img src="https://via.placeholder.com/50" alt="Imagen de Elsa Pato">
+          <span>ELSA PATO</span>
+        </div>
+        <div class="hijos-item">
+          <img src="https://via.placeholder.com/50" alt="Imagen de Luis Hernández">
+          <span>LUIS HERNÁNDEZ</span>
+        </div>
+      </div>
+      <div class="col-md-9 main-content">
+        <h5>HISTORIAL DE ELECCIONES</h5>
+        <p class="placeholder">No hay historial de elecciones.</p>
+        <ul id="lista">
+        </ul>
+        <h5 class="mt-4">PLATOS PROHIBIDOS</h5>
+        <p class="placeholder">No hay platos prohibidos</p>
+        <button class="btn btn-light">AGREGAR</button>
+        <button class="btn btn-light ml-2">BORRAR</button>
       </div>
     </div>
   </div>
 </div>
+<div class="section" id="pantalla-principal">
+  <div class="modal fade" id="ModalForm" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="myform bg-dark">
+                <h1 class="text-center" id="cartelInicioSesion">Iniciar Sesión</h1>
+                <form>
+                    <div class="mb-3 mt-4">
+                        <label for="txtBox_Usuario" class="form-label">Nombre de usuario</label>
+                        <input type="text" class="form-control" id="txtBox_Usuario" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="txtBox_Contrasenia" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="txtBox_Contrasenia" required minlength="8">
+                    </div>
+                    <button id="btn_iniSession" type="button" class="btn btn-light mt-3">ENTRAR</button>
+                    <p>Olvidó su contraseña? <a href="#">Recuperar</a></p>
+                </form>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-text">
+    <div class="p-3 mb-2 bg-dark text-white"><h1>Reservá <span class="bolder">online</span> el almuerzo para tus hijos.</h1></div>
+  </div>
+</div>
+
 <div class="mt-5 section d-none" id="panel-alumnos">
   <div class="container mt-4">
     <h2>Bienvenido, alumno</h2>
     <div class="row mt-4">
       <div class="col-md-12 main-content">
         <h5>MENÚS DISPONIBLES</h5>
-        <ul>
-          <p id="historialElecciones"></p>
-          <ul id="lista" ></ul>
-        <button class="btn btn-light">SELECCIONAR</button>
+        <form>
+          <ul>
+            <p id="listaMenus"></p>
+            <p class="placeholder"> No hay menús disponibles. </p>
+          <button type="submit" class="btn btn-light">SELECCIONAR</button>
+        </form>
       </div>
     </div>
   </div>
@@ -224,6 +253,23 @@ p a:hover {
     <p>&copy; 2024 Comedor Escolar. Todos los derechos reservados.</p>
   </div>
 </footer>
+<script>
+  function showSection(sectionId) {
+  document.querySelectorAll('.section').forEach(function(section) {
+    section.classList.add('d-none');
+    section.classList.remove('d-block');
+  });
+  document.getElementById(sectionId).classList.remove('d-none');
+  document.getElementById(sectionId).classList.add('d-block');
+}
+  function logout() {
+    document.getElementById('btnCerrarSesion').classList.add('d-none');
+    document.getElementById('btnInicioSesion').classList.remove('d-none');
+    document.getElementById('navlinks').classList.remove('d-none');
+    document.getElementById('navlinks2').classList.remove('d-none');
+    document.getElementById('navbarNav').classList.remove('show');
+  }
+</script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script type="module" src="main.js"></script>
 </body>
