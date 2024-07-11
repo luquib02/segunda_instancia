@@ -9,7 +9,7 @@ export class Sistema{
     this.#alumnos = [];
     this.#padres = [];
     this.#menus = [];
-    this.usuarioActivo = '';
+    this.#usuarioActivo = null;
   }
     
   agregarAlumno(alm){
@@ -49,11 +49,18 @@ export class Sistema{
   getMenu(){
     return this.#menus;
   }
+  getAlumnos(){
+    return this.#alumnos;
+  }
+  getPadres(){
+    return this.#padres;
+  }
   setUsuarioActivo(nombre) {
     this.#usuarioActivo = nombre;
   }
   getUsuarioActivo() {
     return this.#usuarioActivo;
   }
+
 
 }

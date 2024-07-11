@@ -13,6 +13,8 @@ const obj3 = new Alumno("Alberto","44448888");
 sistema.agregarAlumno(obj1);
 sistema.agregarPadre(obj2);
 sistema.agregarAlumno(obj3);
+obj2.registrarHijo(obj1);
+var nombre;
 
 const menu1 = new Menu("Milanesa","Pollo rebozado con Panko","Pollo,Pan");
 const menu2 = new Menu("Milanesa","Pollo rebozado con Panko","Pollo,Pan");
@@ -28,10 +30,7 @@ var menus = sistema.getMenu();
 createMenuItem();
 function createMenuItem() {
   // First deletes every ocurrence of a class called placeholder.
-  const elements = document.getElementsByClassName("placeholder");
-  while(elements.length > 0){
-      elements[0].parentNode.removeChild(elements[0]);
-  }
+  deleteClassFromHTML("placeholder");
   // We process the DOM depending user type.
     var parrafo = document.getElementById("listaMenus");
     for (let i = 0; i < menus.length; i++) {
@@ -46,22 +45,48 @@ function createMenuItem() {
       parrafo.appendChild(document.createElement('br'));
   }
   }
-
-function childPlates(child){
-  var parrafo = document.getElementById("listaMenus");
-    for (let i =0; i < sistema.alumnos.menuelegido.length; i++){
-      var spacing = document.createElement('p');
-      var elementElegidos = document.createElement('li');
-      var text = document.createElement('label');
-      text.innerHTML = sistema.alumnos[i].menuelegido[i]
-    }
+function deleteClassFromHTML(className){
+  const elements = document.getElementsByClassName(className);
+  while(elements.length > 0){
+      elements[0].parentNode.removeChild(elements[0]);
+  }
 }
-    
+function showChilds (parent){
+  deleteClassFromHTML("hijos-item");
+  for (let i = 0; i < sistema.getPadres().length; i++) {
+    if (sistema.getPadres()[i] == parent) {
+      //debugging
+      console.log(sistema.getPadres()[i].getHijos());
+      // it works :D
+      for (let j = 0; j < sistema.getPadres()[i].getHijos().length; j++) {
+        var containerHijo = document.createElement('div');
+        containerHijo.className = 'hijos-item';
+        var img = document.createElement('img');
+        img.src = 'https://via.placeholder.com/50';
+        img.alt = 'Imagen de ' + sistema.getPadres()[i].getHijos()[j].getNombre();
+        var span = document.createElement('span');
+        span.innerHTML = sistema.getPadres()[i].getHijos()[j].getNombre().toUpperCase();
+        span.style.paddingLeft = '6px';
+        containerHijo.appendChild(img);
+        containerHijo.appendChild(span);
+        document.getElementById('sidebar').appendChild(containerHijo);
+      }
+    }
+  }
+}
 
+function selectedMenu(aMenu, anAlumno){
+  for (let i = 0; i < sistema.getAlumnos().length; i++) {
+    if (sistema.getAlumnos()[i] == anAlumno) {
+      sistema.getAlumnos()[i].eligioMenu(aMenu);
+      console.log(sistema.getAlumnos()[i].getMenusElegidos());
+    }
+  }
+}
 
-
-function login() {
-    // for some reason, modal backdrop remains after removing login panel, this force-hides it.
+function login(username){
+    sistema.setUsuarioActivo(username);
+  // for some reason, modal backdrop remains after removing login panel, this force-hides it.
     $('.modal').modal('hide');
     $('body').removeClass('modal-open');
   	$('.modal-backdrop').remove();
@@ -77,12 +102,14 @@ btnIniSession.addEventListener('click', () =>{
     alert("Usted ha iniciado sesión como Padre con el Usuario: "+ nomUsuario.value +
      " y Contraseña: "+ contrasenia.value);
     showSection('panel-padre');
+    showChilds(nomUsuario.value);
     login();
 
   }else if(sistema.loginAlumno(nomUsuario.value, contrasenia.value)){
     alert("Usted ha iniciado sesión como Alumno con el Usuario: "+ nomUsuario.value +
     " y Contraseña: "+ contrasenia.value);
-    sistema.setUsuarioActivo(nomUsuario.value);
+    nombre = nomUsuario.value;
+    sistema.setUsuarioActivo(nombre);
     showSection('panel-alumnos');
     login();
   }else{
@@ -92,6 +119,20 @@ btnIniSession.addEventListener('click', () =>{
   }
 }
 )
+btnMenuDatos.addEventListener('click', () =>{
+  var ele = document.getElementsByName('respuesta');
+  for (let i = 0; i < ele.length; i++) {
+      if (ele[i].checked){
+          var seleccionado = ele[i].id;
+          for (let j = 0; j < menus.length; j++) {
+            if (menus[j] == seleccionado) {
+              selectedMenu(menus[j], nombre);
+              console.log('estoy entrando acá :)');
+              console.log(nombre);
+            }
+            }
+  }
+}})
 function setMenuOnGUI() {
   
 }

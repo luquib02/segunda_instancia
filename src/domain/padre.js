@@ -11,7 +11,11 @@ export class Padre extends Usuario{
   registrarHijo(Alumno){
     this.#hijos.push(Alumno);
   }
-
-    
+  toString(){
+    return this.getNombre();
+  }
+  getHijos(){
+    return this.#hijos;
+  }
 }
 

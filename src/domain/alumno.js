@@ -29,4 +29,8 @@ export class Alumno extends Usuario{
     return this.#restricciones;
   }
 
+  toString(){
+    return this.getNombre();
+  }
+
 }
