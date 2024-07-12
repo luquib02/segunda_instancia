@@ -30,7 +30,6 @@ var menus = sistema.getMenu();
 createMenuItem();
 function createMenuItem() {
   // First deletes every ocurrence of a class called placeholder.
-  deleteClassFromHTML("placeholder");
   // We process the DOM depending user type.
     var parrafo = document.getElementById("listaMenus");
     for (let i = 0; i < menus.length; i++) {
@@ -59,16 +58,33 @@ function showChilds (parent){
       console.log(sistema.getPadres()[i].getHijos());
       // it works :D
       for (let j = 0; j < sistema.getPadres()[i].getHijos().length; j++) {
+        //content formatting for list "Hijos".
         var containerHijo = document.createElement('div');
         containerHijo.className = 'hijos-item';
+        containerHijo.style = 'display: flex; align-items: left;';
         var img = document.createElement('img');
         img.src = 'https://via.placeholder.com/50';
         img.alt = 'Imagen de ' + sistema.getPadres()[i].getHijos()[j].getNombre();
-        var span = document.createElement('span');
-        span.innerHTML = sistema.getPadres()[i].getHijos()[j].getNombre().toUpperCase();
-        span.style.paddingLeft = '6px';
+        img.style = 'width: 50px; height: 50px; margin-right: 10px; margin-left: 10px;';
+        var textoContainer = document.createElement('div');
+        textoContainer.style = 'display: flex; flex-direction: column;';
+        var button = document.createElement('button');
+        button.href = '#' + sistema.getPadres()[i].getHijos()[j].getNombre();
+        button.addEventListener('click', function(){showHistoryOfSelectedMenu(sistema.getPadres()[i].getHijos()[j])});
+        button.innerHTML = sistema.getPadres()[i].getHijos()[j].getNombre().toUpperCase();
+        var asistencias = document.createElement('span');
+        // Did the child attend the meal?
+        if (sistema.getPadres()[i].getHijos()[j].getAsistencia()){
+          asistencias.innerHTML = 'Asistió al comedor';
+          asistencias.style = 'font-style: italic; font-size: 14px';
+        } else {
+          asistencias.innerHTML = 'No asistió al comedor';
+          asistencias.style = 'font-style: italic; font-size: 14px';
+        }
         containerHijo.appendChild(img);
-        containerHijo.appendChild(span);
+        containerHijo.appendChild(textoContainer);
+        textoContainer.appendChild(button);
+        textoContainer.appendChild(asistencias);
         document.getElementById('sidebar').appendChild(containerHijo);
       }
     }
@@ -83,6 +99,28 @@ function selectedMenu(aMenu, anAlumno){
     }
   }
 }
+function searchParent(parentName){
+  for (let i = 0; i < sistema.getPadres().length; i++) {
+    if (sistema.getPadres()[i].getNombre() == parentName) {
+      return sistema.getPadres()[i];
+    }
+  }
+}
+function showHistoryOfSelectedMenu(anAlumno){
+  for (let i = 0; i < anAlumno.getMenusElegidos().length; i++) {
+    if (anAlumno.getMenusElegidos().length > 0){
+      deleteClassFromHTML("placeholder");
+      var ul = document.getElementById("lista")
+      var elementMenu = document.createElement('li');
+      elementMenu.id = anAlumno.getMenusElegidos()[i];;
+      elementMenu.innerHTML = anAlumno.getMenusElegidos()[i] + " (" + anAlumno.getMenusElegidos()[i].getDescripcion() +")" + "<br>" + "Contiene: " + anAlumno.getMenusElegidos()[i].getContenido();
+      ul.appendChild(elementMenu);
+      ul.appendChild(document.createElement('br'));
+    }
+
+  }
+}
+// SiAsiste.addEventListener('click', () =>{
 
 function login(username){
     sistema.setUsuarioActivo(username);

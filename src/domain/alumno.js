@@ -1,7 +1,7 @@
 import { Usuario } from "./usuario.js";
 
 export class Alumno extends Usuario{
-  #asistencia = [];
+  #asistencia = false;
   #menuelegido = [];
   #restricciones = [];
 
@@ -10,7 +10,7 @@ export class Alumno extends Usuario{
   }
 
   setAsistencia(asistio){
-    this.#asistencia.push(asistio);
+    this.#asistencia = asistio;
   }
 
   getMenusElegidos(){

@@ -32,7 +32,7 @@
     }
     #pantalla-principal {
       position: relative;
-      background-image: url('/img/image.png'); 
+      background-image: url('/img/imagen.png'); 
       background-size: cover;
       background-position: center;
       height: 100vh;
@@ -230,8 +230,26 @@ p a:hover {
     <div class="p-3 mb-2 bg-dark text-white"><h1>Reservá <span class="bolder">online</span> el almuerzo para tus hijos.</h1></div>
   </div>
 </div>
-
 <div class="mt-5 section d-none" id="panel-alumnos">
+  <div class="modal fade" id="ModalAsistencia" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Sistema de asistencia</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Asistirás hoy al comedor?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="SiAsiste" class="btn btn-primary">Sí</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="container mt-4">
     <h2>Bienvenido, alumno</h2>
     <div class="row mt-4">
