@@ -218,7 +218,7 @@ p a:hover {
                         <label for="txtBox_Contrasenia" class="form-label">Contraseña</label>
                         <input type="password" class="form-control" id="txtBox_Contrasenia" required minlength="8">
                     </div>
-                    <button id="btn_iniSession" type="button" class="btn btn-light mt-3">ENTRAR</button>
+                    <button id="btn_IniSession" type="button" class="btn btn-light mt-3">ENTRAR</button>
                     <p>Olvidó su contraseña? <a href="#">Recuperar</a></p>
                 </form>
             </div>
@@ -231,21 +231,18 @@ p a:hover {
   </div>
 </div>
 <div class="mt-5 section d-none" id="panel-alumnos">
-  <div class="modal fade" id="ModalAsistencia" tabindex="-1" role="dialog">
+  <div class="modal d-block" id="ModalAsistencia" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Sistema de asistencia</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
         </div>
         <div class="modal-body">
           <p>Asistirás hoy al comedor?</p>
         </div>
         <div class="modal-footer">
-          <button type="button" id="SiAsiste" class="btn btn-primary">Sí</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+          <button type="button" id="si_Asiste" class="btn btn-primary">Sí</button>
+          <button type="button" id="no_Asiste" class="btn btn-secondary" data-dismiss="modal">No</button>
         </div>
       </div>
     </div>
@@ -261,6 +258,12 @@ p a:hover {
             <p class="placeholder"> No hay menús disponibles. </p>
           <button type="button" id="btnMenuDatos" class="btn btn-light">SELECCIONAR</button>
         </form>
+      </div>
+      <div class="col-md-12 main-content">
+          <h5>HISTORIAL DE ELECCIONES</h5>
+          <p class="placeholder">No hay historial de elecciones.</p>
+          <ul id="listaEleccionesAlumno">
+          </ul>
       </div>
     </div>
   </div>
@@ -287,6 +290,16 @@ p a:hover {
     document.getElementById('navlinks2').classList.remove('d-none');
     document.getElementById('navbarNav').classList.remove('show');
   }
+  function siAsiste() {
+    for (let i = 0; i < sistema.getAlumnos().length; i++) {
+      if (sistema.getAlumnos()[i].getNombre() == sistema.getUsuarioActivo()) {
+        sistema.getAlumnos()[i].setAsistencia(true);
+        $('.modal').modal('hide');
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+        
+      }}
+  } 
 </script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script type="module" src="main.js"></script>

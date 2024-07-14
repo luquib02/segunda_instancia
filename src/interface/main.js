@@ -4,9 +4,10 @@ import { Padre } from "../domain/padre.js";
 import { Menu} from "../domain/menu.js";
 
 const sistema = new Sistema();
-const btnIniSession = document.getElementById('btn_iniSession');
 const nomUsuario = document.getElementById('txtBox_Usuario');
 const contrasenia = document.getElementById('txtBox_Contrasenia')
+const btnIniSession = document.getElementById('btn_IniSession');
+const btnSiAsiste = document.getElementById('si_Asiste')
 const obj1 = new Alumno("Juan","12341234");
 const obj2 = new Padre("Federico","vegeta777");
 const obj3 = new Alumno("Alberto","44448888");
@@ -44,6 +45,15 @@ function createMenuItem() {
       parrafo.appendChild(document.createElement('br'));
   }
   }
+  btnSiAsiste.addEventListener('click', siAsiste);
+  function siAsiste() {
+    for (let i = 0; i < sistema.getAlumnos().length; i++) {
+      if (sistema.getAlumnos()[i].getNombre() == sistema.getUsuarioActivo()) {
+        sistema.getAlumnos()[i].setAsistencia(true);
+        document.getElementById('ModalAsistencia').classList.add('d-none');
+        $('.modal-backdrop').remove();
+      }}
+  }
 function deleteClassFromHTML(className){
   const elements = document.getElementsByClassName(className);
   while(elements.length > 0){
@@ -70,7 +80,7 @@ function showChilds (parent){
         textoContainer.style = 'display: flex; flex-direction: column;';
         var button = document.createElement('button');
         button.href = '#' + sistema.getPadres()[i].getHijos()[j].getNombre();
-        button.addEventListener('click', function(){showHistoryOfSelectedMenu(sistema.getPadres()[i].getHijos()[j])});
+        button.addEventListener('click', function(){showHistoryOfSelectedMenu(sistema.getPadres()[i].getHijos()[j], "lista")});
         button.innerHTML = sistema.getPadres()[i].getHijos()[j].getNombre().toUpperCase();
         var asistencias = document.createElement('span');
         // Did the child attend the meal?
@@ -106,11 +116,18 @@ function searchParent(parentName){
     }
   }
 }
-function showHistoryOfSelectedMenu(anAlumno){
+function searchChild(childName){
+  for (let i = 0; i < sistema.getAlumnos().length; i++) {
+    if (sistema.getAlumnos()[i].getNombre() == childName) {
+      return sistema.getAlumnos()[i];
+    }
+  }
+}
+function showHistoryOfSelectedMenu(anAlumno, id){
   for (let i = 0; i < anAlumno.getMenusElegidos().length; i++) {
     if (anAlumno.getMenusElegidos().length > 0){
       deleteClassFromHTML("placeholder");
-      var ul = document.getElementById("lista")
+      var ul = document.getElementById(id)
       var elementMenu = document.createElement('li');
       elementMenu.id = anAlumno.getMenusElegidos()[i];;
       elementMenu.innerHTML = anAlumno.getMenusElegidos()[i] + " (" + anAlumno.getMenusElegidos()[i].getDescripcion() +")" + "<br>" + "Contiene: " + anAlumno.getMenusElegidos()[i].getContenido();
@@ -141,7 +158,7 @@ btnIniSession.addEventListener('click', () =>{
      " y Contraseña: "+ contrasenia.value);
     showSection('panel-padre');
     showChilds(nomUsuario.value);
-    login();
+    login(nomUsuario.value);
 
   }else if(sistema.loginAlumno(nomUsuario.value, contrasenia.value)){
     alert("Usted ha iniciado sesión como Alumno con el Usuario: "+ nomUsuario.value +
@@ -149,7 +166,9 @@ btnIniSession.addEventListener('click', () =>{
     nombre = nomUsuario.value;
     sistema.setUsuarioActivo(nombre);
     showSection('panel-alumnos');
-    login();
+    login(nombre)
+    var alumno = searchChild(nombre);
+    showHistoryOfSelectedMenu(alumno, "listaEleccionesAlumno");
   }else{
     alert("Usuario o contraseña incorrecto");
     document.getElementById('txtBox_Usuario').style ='animation-name: shake, glow-red; animation-duration: 0.7s, 0.35s; animation-iteration-count: 1, 2;'

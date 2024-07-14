@@ -3,13 +3,13 @@ export class Sistema{
   #alumnos;
   #padres;
   #menus;
-  #usuarioActivo
+  #usuarioActivo;
 
   constructor(){
     this.#alumnos = [];
     this.#padres = [];
     this.#menus = [];
-    this.#usuarioActivo = null;
+    this.#usuarioActivo = '';
   }
     
   agregarAlumno(alm){
