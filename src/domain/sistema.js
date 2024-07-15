@@ -40,12 +40,19 @@ export class Sistema{
   }
 
   selectedProhibitedMenu(aMenu, anAlumno){
+    // sets in the system the prohibited menus for the selected student
+    if (anAlumno == undefined || aMenu == {} || aMenu == {
+      titulo: '',
+      descripcion: '',
+      contiene: ''
+    }) {
+      throw new Error('No se ha seleccionado un alumno, o el menú es vacío.');
+    }
     for (let i = 0; i < this.getAlumnos().length; i++) {
       if (this.getAlumnos()[i] == anAlumno) {
         this.getAlumnos()[i].setRestricciones(aMenu);
       }
     }
-    console.log(this.getAlumnos())
   }
 
   loginPadre(nombre, contrasenia){
@@ -57,6 +64,15 @@ export class Sistema{
       }
     }
     return correcto;
+  }
+
+  searchChild(childName){
+    for (let i = 0; i < this.getAlumnos().length; i++) {
+      if (this.getAlumnos()[i].getNombre() == childName) {
+        return this.getAlumnos()[i];
+      }
+    }
+    throw new Error('Alumno / Hijo no encontrado.');
   }
   
   agregarMenu(menu){

@@ -2,8 +2,11 @@ import { Sistema } from "../domain/sistema.js";
 import { Alumno } from "../domain/alumno.js";
 import { Padre } from "../domain/padre.js";
 import { Menu} from "../domain/menu.js";
-
+// Most of the comments in here are in English. Why? 
+// I'm practicing good commenting for other contributions (Minecraft mods) that I'm doing.
+// Declaration of sistema for further use.
 const sistema = new Sistema();
+// Key variables for DOM manipulation.
 const nomUsuario = document.getElementById('txtBox_Usuario');
 const contrasenia = document.getElementById('txtBox_Contrasenia')
 const btnIniSession = document.getElementById('btn_IniSession');
@@ -11,37 +14,41 @@ const btnSiAsiste = document.getElementById('si_Asiste');
 const btnNoAsiste = document.getElementById('no_Asiste');
 const btn_agregar = document.getElementById('btnAgregar');
 const btn_borrar = document.getElementById('btnBorrar');
-const obj1 = new Alumno("Juan","12341234");
-const obj2 = new Padre("Federico","vegeta777");
-const obj3 = new Alumno("Alberto","44448888");
 const cerrarProhibido = document.getElementById('cerrarProhibnido');
 const guardarProhibido = document.getElementById('guardarProhibido');
 const btnMenuDatos = document.getElementById('btnMenuDatos');
 const btn_borrar2 = document.getElementById('btnBorrar2');
-var veces = 0;
+
+// Placeholder users for testing purposes.
+const obj1 = new Alumno("Juan","12341234");
+const obj2 = new Padre("Federico","vegeta777");
+const obj3 = new Alumno("Alberto","44448888");
+// Add'em to the system class.
 sistema.agregarAlumno(obj1);
 sistema.agregarPadre(obj2);
 sistema.agregarAlumno(obj3);
 obj2.registrarHijo(obj1);
-var nombre;
 
+// Placeholder menus for testing purposes.
 const menu1 = new Menu("Milanesa de pollo","Pollo rebozado","Pollo,Pan");
 const menu2 = new Menu("Carne con Papas","Carne cocida al horno condimentada con especias","Carne, Papas, orégano");
 const menu3 = new Menu("Tarta de Fiambre","Tarta con Jamón y queso","Jamón, Queso, Harina");
 const menu4 = new Menu("Chop Suey","Vegetales y pollo al wok","Pollo, Verdura, Salsa de Soja");
 const menu5 = new Menu("Milanesa de soja","Opcion vegetariana: Soja, pan triturado","Soja, Harina, sal");
+// Add'em to the system class.
 sistema.agregarMenu(menu1);
 sistema.agregarMenu(menu2);
 sistema.agregarMenu(menu3);
 sistema.agregarMenu(menu4);
 sistema.agregarMenu(menu5);
 var menus = sistema.getMenu();
+// Global variable for storing the child selected by the parent, or the logged in child's name.
 var hijo = '';
 
 btn_borrar.addEventListener('click', () => updateProhibitedItems());
 function updateProhibitedItems() {
   deleteClassFromHTML('item-prohibido');
-  let childObject = searchChild(hijo);
+  let childObject = sistema.searchChild(hijo);
   for (let i = 0; i < childObject.getRestricciones().length; i++) {
     if (childObject.getRestricciones().length > 0){
       var ul = document.getElementById("listaPlatosProhibidosEnPadre");
@@ -69,7 +76,7 @@ function updateProhibitedItems() {
   }
 }
 btn_borrar2.addEventListener('click', () => {
-  var childObject = searchChild(hijo);
+  var childObject = sistema.searchChild(hijo);
   for (let i = 0; i < childObject.getRestricciones().length; i++) {
     if (childObject.getRestricciones().length > 0){
       var ele = document.getElementsByName('respuestaEliminar');
@@ -81,9 +88,7 @@ btn_borrar2.addEventListener('click', () => {
               childObject.getRestricciones().splice(k, 1);
               console.log(childObject.getRestricciones());
               console.log('estoy entrando acá :) (borrar coso)');
-              console.log(nombre);
               updateProhibitedItems();
-              break;
             }
           }
         }
@@ -97,7 +102,7 @@ function createMenuItem(toAppendStuff) {
   deleteClassFromHTML('itemmenu');
   // We process the DOM depending user type.
   var parrafo = document.getElementById(toAppendStuff);
-  let childObject = searchChild(hijo);
+  let childObject = sistema.searchChild(hijo);
   console.log(childObject);
   for (let i = 0; i < menus.length; i++) {
     let encontro = false
@@ -172,7 +177,7 @@ btnMenuDatos.addEventListener('click', () =>{
           sistema.selectedMenu(menus[j], nombre);
           console.log('estoy entrando acá :)');
           console.log(nombre);
-          showHistoryOfSelectedMenu(searchChild(nombre), "listaEleccionesEnAlumno");
+          showHistoryOfSelectedMenu(sistema.searchChild(nombre), "listaEleccionesEnAlumno");
         }
       }
     }
@@ -187,20 +192,20 @@ function siAsiste() {
 }
 
 function deleteClassFromHTML(className){
+  // One of the most used functions in this proyect for DOM manipulation. 
+  // Searches for all occurences of a class and removes them.
   const elements = document.getElementsByClassName(className);
   while(elements.length > 0){
     elements[0].parentNode.removeChild(elements[0]);
   }
 }
 function setSelectedChild(username){
+  // sets the global variable hijo to the user selected child, not the most elegant solution I might say. 
   hijo = username;
 }
 function showChilds (parent){
   for (let i = 0; i < sistema.getPadres().length; i++) {
-    if (sistema.getPadres()[i] == parent && veces < 1) {
-      veces += 1;
-      //debugging
-      // it works :D
+    if (sistema.getPadres()[i] == parent) {
       for (let j = 0; j < sistema.getPadres()[i].getHijos().length; j++) {
         deleteClassFromHTML("hijos-item");
         //content formatting for list "Hijos".
@@ -215,6 +220,8 @@ function showChilds (parent){
         textoContainer.style = 'display: flex; flex-direction: column;';
         var button = document.createElement('button');
         button.href = '#' + sistema.getPadres()[i].getHijos()[j].getNombre();
+        // Largest addEventListener that I've ever seen and written.
+        // Makes all the necesary adjustemnts to the section that is going to be shown.
         button.addEventListener('click', function(){showHistoryOfSelectedMenu(sistema.getPadres()[i].getHijos()[j], "listaEleccionesEnPadre"); setSelectedChild(sistema.getPadres()[i].getHijos()[j]);studientRestrictions(hijo);updateProhibitedItems()});
         button.innerHTML = sistema.getPadres()[i].getHijos()[j].getNombre().toUpperCase();
         var asistencias = document.createElement('span');
@@ -226,6 +233,7 @@ function showChilds (parent){
           asistencias.innerHTML = 'No asistió al comedor';
           asistencias.style = 'font-style: italic; font-size: 14px';
         }
+        // Appending all the generated stuff to the HTML.
         containerHijo.appendChild(img);
         containerHijo.appendChild(textoContainer);
         textoContainer.appendChild(button);
@@ -237,7 +245,7 @@ function showChilds (parent){
 }
 
 function studientRestrictions(child){
-  var childObject = searchChild(child);
+  var childObject = sistema.searchChild(child);
   deleteClassFromHTML("placeholder");
   deleteClassFromHTML('item-prohibido');
   for (let i = 0; i < childObject.getRestricciones().length; i++) {
@@ -262,13 +270,7 @@ function studientRestrictions(child){
 //   }
 //   throw new Error('Padre no encontrado.');
 // }
-function searchChild(childName){
-  for (let i = 0; i < sistema.getAlumnos().length; i++) {
-    if (sistema.getAlumnos()[i].getNombre() == childName) {
-      return sistema.getAlumnos()[i];
-    }
-  }
-}
+
 function showHistoryOfSelectedMenu(anAlumno, id){
   console.log(id)
   deleteClassFromHTML("placeholder");
@@ -315,7 +317,7 @@ btnIniSession.addEventListener('click', () =>{
     showSection('panel-alumnos');
     login(nombre)
     hijo = nombre;
-    var alumno = searchChild(nombre);
+    var alumno = sistema.searchChild(nombre);
     showHistoryOfSelectedMenu(alumno, "listaEleccionesEnAlumno");
     createMenuItem("listaMenus");
   }else{

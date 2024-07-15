@@ -35,6 +35,6 @@ describe('Alumno', () =>{
     alm.setAsistencia(false);
     alm.setAsistencia(true);
     alm.setAsistencia(true);
-    expect(alm.getAsistencia()[2]).toBe(true);
+    expect(alm.getAsistencia()).toBe(true);
   })
 });

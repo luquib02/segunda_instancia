@@ -51,5 +51,40 @@ describe('Sistema', () =>{
   it('return menus', () =>{
     sistema.agregarMenu(menu);
     expect(sistema.getMenu()[0].getTitulo()).toBe("Milanesa");
-  })
+  });
+  it('should throw an error when anAlumno is undefined', () => {
+      expect(() => sistema.selectedProhibitedMenu('menu', undefined)).toThrow('No se ha seleccionado un alumno, o el menú es vacío.');
+  });
+  it('should throw an error when aMenu is empty', () => {
+    expect(() => sistema.selectedProhibitedMenu('{}', undefined)).toThrow('No se ha seleccionado un alumno, o el menú es vacío.');
+  });
+  it('should set the prohibited menus for the selected student', () => {
+    sistema.selectedProhibitedMenu(menu, alm.getNombre());
+    expect(alm.getRestricciones()).toEqual([menu]);
+  });
+  it('should add the selected menu to the students list of chosen menus', () => {
+    sistema.selectedMenu(menu, alm);
+    expect(alm.getMenusElegidos()).toEqual([menu]);
+  });
+  it('should add a new student to the list of students', () => {
+    expect(sistema.getAlumnos()).toContain(alm);
+  });
+  test('searchChild should return the student object when the child name is found', () => {
+    const alumno1 = new Alumno('Alice');
+    const alumno2 = new Alumno('Bob');
+    sistema.agregarAlumno(alumno1);
+    sistema.agregarAlumno(alumno2);
+  
+    const result = sistema.searchChild('Bob');
+  
+    expect(result).toEqual(alumno2);
+  });
+  
+  // Test case 2: Testing when the child name is not found in the list of students
+  test('searchChild should throw an error when the child name is not found', () => {
+    const alumno1 = new Alumno('Alice');
+    sistema.agregarAlumno(alumno1);
+  
+    expect(() => sistema.searchChild('Bob')).toThrowError('Alumno / Hijo no encontrado.');
+  });
 });
