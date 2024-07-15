@@ -1,3 +1,5 @@
+/* global $ */
+// Yeah had to declare that for the linter not being happy.
 import { Sistema } from "../domain/sistema.js";
 import { Alumno } from "../domain/alumno.js";
 import { Padre } from "../domain/padre.js";
@@ -174,10 +176,10 @@ btnMenuDatos.addEventListener('click', () =>{
       var seleccionado = ele[i].id;
       for (let j = 0; j < menus.length; j++) {
         if (menus[j] == seleccionado) {
-          sistema.selectedMenu(menus[j], nombre);
+          sistema.selectedMenu(menus[j], hijo);
           console.log('estoy entrando acá :)');
-          console.log(nombre);
-          showHistoryOfSelectedMenu(sistema.searchChild(nombre), "listaEleccionesEnAlumno");
+          console.log(hijo);
+          showHistoryOfSelectedMenu(sistema.searchChild(hijo), "listaEleccionesEnAlumno");
         }
       }
     }
@@ -303,7 +305,8 @@ btnIniSession.addEventListener('click', () =>{
   if(sistema.loginPadre(nomUsuario.value, contrasenia.value)){
     alert("Usted ha iniciado sesión como Padre con el Usuario: "+ nomUsuario.value +
      " y Contraseña: "+ contrasenia.value);
-    showSection('panel-padre');
+    /* eslint-disable-next-line*/
+    showSection('panel-padre'); // whenever showSection is called, eslint looses it's mind.
     showChilds(nomUsuario.value);
     login(nomUsuario.value);
     deleteClassFromHTML('item-prohibido');
@@ -312,12 +315,12 @@ btnIniSession.addEventListener('click', () =>{
   }else if(sistema.loginAlumno(nomUsuario.value, contrasenia.value)){
     alert("Usted ha iniciado sesión como Alumno con el Usuario: "+ nomUsuario.value +
     " y Contraseña: "+ contrasenia.value);
-    nombre = nomUsuario.value;
-    sistema.setUsuarioActivo(nombre);
+    hijo = nomUsuario.value;
+    sistema.setUsuarioActivo(hijo);
+    /* eslint-disable-next-line*/
     showSection('panel-alumnos');
-    login(nombre)
-    hijo = nombre;
-    var alumno = sistema.searchChild(nombre);
+    login(hijo)
+    var alumno = sistema.searchChild(hijo);
     showHistoryOfSelectedMenu(alumno, "listaEleccionesEnAlumno");
     createMenuItem("listaMenus");
   }else{

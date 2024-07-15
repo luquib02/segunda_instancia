@@ -272,12 +272,9 @@ p a:hover {
     <div class="row mt-4">
       <div class="col-md-12 main-content">
         <h5>MENÚS DISPONIBLES</h5>
-        <form>
-          <ul>
             <p id="listaMenus"></p>
             <p class="placeholder"> No hay menús disponibles. </p>
           <button type="button" id="btnMenuDatos" class="btn btn-light">SELECCIONAR</button>
-        </form>
       </div>
       <div class="col-md-12 main-content" style="margin-top: 10px;" id="menu-seleccionado">
           <h5>HISTORIAL DE ELECCIONES</h5>
@@ -295,6 +292,7 @@ p a:hover {
   </div>
 </footer>
 <script>
+  /* jshint ignore:start*/
   function showSection(sectionId) {
   document.querySelectorAll('.section').forEach(function(section) {
     section.classList.add('d-none');
@@ -302,6 +300,7 @@ p a:hover {
   });
   document.getElementById(sectionId).classList.remove('d-none');
   document.getElementById(sectionId).classList.add('d-block');
+  /* jshint ignore:end*/
 }
   function logout() {
     document.getElementById('btnCerrarSesion').classList.add('d-none');

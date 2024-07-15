@@ -53,7 +53,7 @@ describe('Sistema', () =>{
     expect(sistema.getMenu()[0].getTitulo()).toBe("Milanesa");
   });
   it('should throw an error when anAlumno is undefined', () => {
-      expect(() => sistema.selectedProhibitedMenu('menu', undefined)).toThrow('No se ha seleccionado un alumno, o el menú es vacío.');
+    expect(() => sistema.selectedProhibitedMenu('menu', undefined)).toThrow('No se ha seleccionado un alumno, o el menú es vacío.');
   });
   it('should throw an error when aMenu is empty', () => {
     expect(() => sistema.selectedProhibitedMenu('{}', undefined)).toThrow('No se ha seleccionado un alumno, o el menú es vacío.');
@@ -69,7 +69,7 @@ describe('Sistema', () =>{
   it('should add a new student to the list of students', () => {
     expect(sistema.getAlumnos()).toContain(alm);
   });
-  test('searchChild should return the student object when the child name is found', () => {
+  it('searchChild should return the student object when the child name is found', () => {
     const alumno1 = new Alumno('Alice');
     const alumno2 = new Alumno('Bob');
     sistema.agregarAlumno(alumno1);
@@ -81,7 +81,7 @@ describe('Sistema', () =>{
   });
   
   // Test case 2: Testing when the child name is not found in the list of students
-  test('searchChild should throw an error when the child name is not found', () => {
+  it('searchChild should throw an error when the child name is not found', () => {
     const alumno1 = new Alumno('Alice');
     sistema.agregarAlumno(alumno1);
   
