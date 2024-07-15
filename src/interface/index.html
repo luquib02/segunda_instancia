@@ -188,15 +188,35 @@ p a:hover {
           <span>LUIS HERNÁNDEZ</span>
         </div>
       </div>
-      <div class="col-md-9 main-content">
+      <div class="col-md-12 main-content">
         <h5>HISTORIAL DE ELECCIONES</h5>
         <p class="placeholder">No hay historial de elecciones.</p>
-        <ul id="lista">
+        <ul id="listaEleccionesEnPadre">
         </ul>
         <h5 class="mt-4">PLATOS PROHIBIDOS</h5>
         <p class="placeholder">No hay platos prohibidos</p>
-        <button class="btn btn-light">AGREGAR</button>
-        <button class="btn btn-light ml-2">BORRAR</button>
+        <ul id="listaPlatosProhibidosEnPadre">
+        </ul>
+        <button class="btn btn-light" id="btnAgregar">AGREGAR</button>
+        <button class="btn btn-light ml-2" id="btnBorrar">SELECCIONAR</button>
+        <button class="btn btn-light ml-2" id="btnBorrar2">BORRAR</button>
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="ModalAgregarProhibido" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Seleccione el plato a prohibir</h5>
+        </div>
+        <div class="modal-body">
+          <ul id="listaPlatosAProhibir">
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="cerrarProhibnido" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" id="guardarProhibido">Guardar</button>
+        </div>
       </div>
     </div>
   </div>
@@ -232,7 +252,7 @@ p a:hover {
 </div>
 <div class="mt-5 section d-none" id="panel-alumnos">
   <div class="modal d-block" id="ModalAsistencia" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Sistema de asistencia</h5>
@@ -259,10 +279,10 @@ p a:hover {
           <button type="button" id="btnMenuDatos" class="btn btn-light">SELECCIONAR</button>
         </form>
       </div>
-      <div class="col-md-12 main-content">
+      <div class="col-md-12 main-content" style="margin-top: 10px;" id="menu-seleccionado">
           <h5>HISTORIAL DE ELECCIONES</h5>
           <p class="placeholder">No hay historial de elecciones.</p>
-          <ul id="listaEleccionesAlumno">
+          <ul id="listaEleccionesEnAlumno"> 
           </ul>
       </div>
     </div>

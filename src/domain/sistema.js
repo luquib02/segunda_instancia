@@ -15,11 +15,19 @@ export class Sistema{
   agregarAlumno(alm){
     this.#alumnos.push(alm);
   }
-
+  selectedMenu(aMenu, anAlumno){
+    for (let i = 0; i < this.getAlumnos().length; i++) {
+      if (this.getAlumnos()[i] == anAlumno) {
+        this.getAlumnos()[i].eligioMenu(aMenu);
+        console.log(this.getAlumnos()[i].getMenusElegidos());
+      }
+    }
+  }
   agregarPadre(pad){
     this.#padres.push(pad);
   }
 
+  
   loginAlumno(nombre, contrasenia){
     let correcto=false;
     for(let i=0; i<this.#alumnos.length; i++){
@@ -29,6 +37,15 @@ export class Sistema{
       }
     }
     return correcto;
+  }
+
+  selectedProhibitedMenu(aMenu, anAlumno){
+    for (let i = 0; i < this.getAlumnos().length; i++) {
+      if (this.getAlumnos()[i] == anAlumno) {
+        this.getAlumnos()[i].setRestricciones(aMenu);
+      }
+    }
+    console.log(this.getAlumnos())
   }
 
   loginPadre(nombre, contrasenia){
@@ -61,6 +78,6 @@ export class Sistema{
   getUsuarioActivo() {
     return this.#usuarioActivo;
   }
-
+  
 
 }
