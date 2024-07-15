@@ -39,7 +39,8 @@ Utilizamos la nomenclartura camello con nombres descriptivos, logrando de esta f
 En cuanto a Programación Orientada a Objetos, el proyecto guarda a los alumnos, padres y menús como clases o objetos. Esto asegura que el código sea facil de entender para alguien externo al proyecto, además de permitir el correcto uso de permisos de las propiedades de un objeto.
 Se priorizó el orden y organización del codigo, segmentando los métodos que maniupaln el DOM con los métodos y funciones que manipulan el sistema
 ### Análisis estático de código
-![imagen](https://github.com/IngSoft-FIS-2024-1/proyecto-m3aan-bafico-lopez/assets/115313229/088bacd7-2e2f-4816-9f35-e646fe1bca4d)
+![image](https://github.com/user-attachments/assets/1cd090dc-d9ef-4cc9-8dbf-0225faddf2d3)
+
 
 En esta imagen, podemos ver que el proyecto ejecuta EsLint sin errores.
 
@@ -50,7 +51,8 @@ Debido a la necesidad de verificar que el proyecto sea robusto y tena la menor c
 Para poder crear un proyecto robusto y confiable, realizamos testing en el 100% de las clases de dominio, testeando todas las lineas de código. Y al momento de buscar fallas en el codigo, nos aseguramos de testear una falla a la vez, evitando el ocultamiendo de errores.
 Gracias a esto, podemos decir con certeza que el proyecto posee cierto nivel de robustez.
 ### Informe de cobertura
-![imagen](https://github.com/IngSoft-FIS-2024-1/proyecto-m3aan-bafico-lopez/assets/115313229/1ef8b704-d6c5-484f-9d79-34a3a88fb356)
+![image](https://github.com/user-attachments/assets/9af5170d-3f51-4252-b2af-103230d3174b)
+
 
 En esta imagen, podemos observar que Jest tiene un 100% de cobertura para la clase de dominio.
 
