@@ -1,4 +1,5 @@
 import {describe, it, expect, beforeEach} from '@jest/globals';
+import {jest} from '@jest/globals'
 import { Sistema}  from '../sistema.js';
 import { Alumno } from '../alumno.js';
 import { Padre } from '../padre.js';
@@ -86,5 +87,43 @@ describe('Sistema', () =>{
     sistema.agregarAlumno(alumno1);
   
     expect(() => sistema.searchChild('Bob')).toThrowError('Alumno / Hijo no encontrado.');
+  });
+  it('should return the correct array of fathers', () => {
+    const padre1 = new Padre('John');
+    const padre2 = new Padre('Doe');
+    sistema.agregarPadre(padre1);
+    sistema.agregarPadre(padre2);
+
+    expect(sistema.getPadres()).toEqual([pad, padre1, padre2]);
+  });
+  it('should return undefined if no fathers are added', () => {
+    expect(sistema.getPadres()[2]).toEqual(undefined);
+  });
+  it('logs the menus selected by the alumno', () => {
+    const logSpy = jest.spyOn(console, 'log');
+    sistema.selectedMenu(menu, alm);
+    expect(logSpy).toHaveBeenCalledWith(alm.getMenusElegidos());
+  });
+  it('should add the selected menu to the students list of chosen menus', () => {
+    // Adding the student to the system
+    sistema.agregarAlumno(alm);
+    
+    // Calling the selectedMenu function
+    sistema.selectedMenu(menu, alm);
+    expect(alm.getMenusElegidos()).toEqual([menu, menu]);
+  });
+  it('case when the student is not in the system', () => {
+    expect(() => sistema.selectedMenu(menu, 'Bob Esponja')).toThrowError('Alumno / Hijo no encontrado.');
+  });
+  it('case when the student is not in the system', () => {
+    expect(() => sistema.selectedProhibitedMenu(menu, 'Bob Esponja')).toThrowError('Alumno / Hijo no encontrado.');
+  });
+  it('should return the name of the parent', () => {
+    const parent = new Padre('John Doe');
+    expect(parent.toString()).toBe('John Doe');
+  });
+  it('should return an empty array if no childs have been registered', () => {
+    const padre = new Padre("Juan", "1234");
+    expect(padre.getHijos()).toEqual([]);
   });
 });

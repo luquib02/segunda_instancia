@@ -16,11 +16,16 @@ export class Sistema{
     this.#alumnos.push(alm);
   }
   selectedMenu(aMenu, anAlumno){
+    let esta = false
     for (let i = 0; i < this.getAlumnos().length; i++) {
       if (this.getAlumnos()[i] == anAlumno) {
         this.getAlumnos()[i].eligioMenu(aMenu);
         console.log(this.getAlumnos()[i].getMenusElegidos());
+        esta = true;
       }
+    }
+    if (!esta) {
+      throw new Error('Alumno / Hijo no encontrado.');
     }
   }
   agregarPadre(pad){
@@ -48,10 +53,15 @@ export class Sistema{
     }) {
       throw new Error('No se ha seleccionado un alumno, o el menú es vacío.');
     }
+    let esta = false
     for (let i = 0; i < this.getAlumnos().length; i++) {
       if (this.getAlumnos()[i] == anAlumno) {
         this.getAlumnos()[i].setRestricciones(aMenu);
+        esta = true
       }
+    }
+    if (!esta) {
+      throw new Error('Alumno / Hijo no encontrado.');
     }
   }
 
